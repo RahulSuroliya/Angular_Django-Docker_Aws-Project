@@ -25,9 +25,9 @@ services:
     ports:
       - "8000:8000"
     depends_on:
-      - db
+      - db  # Change from mysql to db
     environment:
-      - DB_HOST=db
+      - DB_HOST=db  # Change from mysql to db
       - DB_NAME=sop_django
       - DB_USER=root
       - DB_PASSWORD=root
