@@ -1,0 +1,71 @@
+
+<body style="background-color:whitesmoke;background-image: url(../../assets/bg7.jpg);
+background-repeat: no-repeat;background-size: cover;width: 100%;">
+<br><br>
+
+<div class="modal-dialog" style="width: 500px;">
+    <div class="modal-content" style="background-color: whitesmoke;
+    background-image: url(../../assets/bg10.webp);background-repeat:no-repeat;background-size: cover;">
+        <div class="modal-header text-center">
+            <h4 class="modal-title" style="font-family: bold;font-size: xx-large;margin-left:170px;">Order
+            </h4>
+        </div>
+        <div *ngIf="success == true;then SUCC else FAIL"></div>
+        <ng-template #SUCC><b style="color:green;text-align: center;font-size: x-large;">{{ message }}</b></ng-template>
+        <ng-template #FAIL><b style="color:red;text-align: center;font-size: x-large;">{{ message }}</b></ng-template>
+
+        <form>
+        <div class="modal-body" style="padding: 10px;">
+            
+            <div class="form-group row">
+                <div class="col-lg-1"></div>
+                <label class="col-lg-3 form-control-label">Quantity<span style="color:Red">*</span></label>
+                <div class="col-lg-6">
+                    <input [(ngModel)]="form.quantity" name="quantity" type="number" placeholder="Enter your quantity">
+                    <span style="color:red">{{ inputError.quantity }}</span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-lg-1"></div>
+                <label class="col-lg-3 form-control-label">Product<span style="color:Red">*</span></label>
+                <div class="col-lg-6">
+                    <select [(ngModel)]="form.pid" name="pid" style="width: 200px;height:30px;">
+                        <option *ngFor="let r of preloadData"  value="{{ r.pid}}">{{ r.product }}</option>
+                        </select>
+                    <span style="color:red">{{ inputError.pid }}</span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-lg-1"></div>
+                <label class="col-lg-3 form-control-label">Date<span style="color:red">*</span></label>
+                    <div class="col-lg-6">
+                        <input [(ngModel)]="form.date" name="date" type="date" style="width:200px;">
+                        <span style="color:red">{{ inputError.date }}</span>
+                    </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-lg-1"></div>
+                <label class="col-lg-3 form-control-label">Amount<span style="color:Red">*</span></label>
+                <div class="col-lg-6">
+                    <input [(ngModel)]="form.amount" type="number" name="amount" placeholder="Enter your amount">
+                    <span style="color:Red">{{ inputError.amount }}</span>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-2"></div>
+                <div class="col-lg-3">
+                    <button (click)="save()" type="submit" class="btn btn-success form-control">Save</button>
+                </div>
+                <div class="col-lg-3">
+                    <button (click)="reset()" class="btn btn-primary form-control">Reset</button>
+                </div>
+            </div>
+
+        </div>
+        </form>
+
+    </div>
+</div>
+
+</body>

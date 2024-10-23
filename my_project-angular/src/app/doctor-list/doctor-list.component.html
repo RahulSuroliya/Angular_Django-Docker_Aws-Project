@@ -1,0 +1,123 @@
+<body style="background-color: #e8f5e9; background-image: url('https://www.w3schools.com/w3images/mountains.jpg'); background-repeat: no-repeat; background-size: cover; width: 100%; font-family: 'Arial', sans-serif; margin-bottom: 36px;">
+    <br>
+    <h1 class="text-center mb-4" style="font-size: 2.5rem; color: #388e3c;">Doctor List</h1>
+    
+    <div class="container-fluid">
+        <!-- Search Form -->
+        <div class="row align-items-center mb-4">
+            <!-- Name Input -->
+            <div class="col-lg-2">
+                <label for="nameInput" style="font-weight: bold; color: #388e3c;">Name:</label>
+                <input id="nameInput" [(ngModel)]="form.name" name="name" placeholder="Enter name" class="form-control" style="border-radius: 5px; border-color: #388e3c;">
+                <span style="color: Red;">{{ inputError.name }}</span>
+            </div>
+
+            <!-- Expertise Select -->
+            <div class="col-lg-2">
+                <label for="expertiseSelect" style="font-weight: bold; color: #388e3c;">Expertise:</label>
+                <select id="expertiseSelect" [(ngModel)]="form.eid" name="eid" class="form-control" style="border-radius: 5px; border-color: #388e3c;">
+                    <option value="">Select expertise</option>
+                    <option *ngFor="let r of preloadData" value="{{ r.eid }}">{{ r.expertise }}</option>
+                </select>
+                <span style="color: Red;">{{ inputError.eid }}</span>
+            </div>
+
+            <!-- Date of Birth Input -->
+            <div class="col-lg-2">
+                <label for="dobInput" style="font-weight: bold; color: #388e3c;">Date of Birth:</label>
+                <input id="dobInput" [(ngModel)]="form.dob" type="date" name="dob" class="form-control" style="border-radius: 5px; border-color: #388e3c;">
+                <span style="color: Red;">{{ inputError.dob }}</span>
+            </div>
+
+            <!-- Mobile Input -->
+            <div class="col-lg-2">
+                <label for="mobileInput" style="font-weight: bold; color: #388e3c;">Mobile:</label>
+                <input id="mobileInput" [(ngModel)]="form.mobile" name="mobile" placeholder="Enter mobile" class="form-control" style="border-radius: 5px; border-color: #388e3c;">
+                <span style="color: Red;">{{ inputError.mobile }}</span>
+            </div>
+
+            <!-- Search Button -->
+            <div class="col-lg-2">
+                <label>&nbsp;</label> <!-- Empty label for spacing -->
+                <button (click)="submit()" type="submit" class="btn btn-success w-100" style="border-radius: 5px; background-color: #4caf50; border-color: #4caf50; color: #fff;">
+                    Search <i class="fa fa-search"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Success/Failure Message -->
+        <div *ngIf="success == true; then SUCC else FAIL"></div>
+        <ng-template #SUCC>
+            <b class="d-block text-center mt-2" style="color: #4caf50; font-size: x-large; animation: fadeInDown 0.5s;">
+                <img style="height: 20px; margin-right: 5px;"> {{ message }}
+            </b>
+        </ng-template>
+        <ng-template #FAIL>
+            <b class="d-block text-center mt-2" style="color: #d32f2f; font-size: x-large; animation: fadeInDown 0.5s;">
+                <img  style="height: 20px; margin-right: 5px;"> {{ message }}
+            </b>
+        </ng-template>
+
+        <!-- Doctor List Table -->
+        <table class="table table-bordered border-dark table-sm table-hover table-responsive-sm mt-4" style="background-color: #dcedc8;">
+            <thead class="thead-dark" style="background-color: #2c6b2f; color: white;">
+                <tr>
+                    <th>S.No.</th>
+                    <th>Name</th>
+                    <th>Expertise</th>
+                    <th>Date of Birth</th>
+                    <th>Mobile</th>
+                    <th>Edit</th>
+                    <th>Delete</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let e of list; let i = index;">
+                    <td>{{ form.index + i }}</td>
+                    <td>{{ e.name }}</td>
+                    <td>{{ e.expertise }}</td>
+                    <td>{{ e.dob }}</td>
+                    <td>{{ e.mobile }}</td>
+                    <td><button (click)="edit(e.id)" class="btn btn-link text-primary">Edit <i class="fa fa-edit"></i></button></td>
+                    <td><button (click)="delete(e.id)" class="btn btn-link text-danger">Delete <i class="fa fa-trash"></i></button></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <!-- Pagination Controls -->
+        <div *ngIf="form.mesg == ''; then EPAG else DPAG"><div *ngIf="form.mesg == null;then DPAG else EPAG"></div></div>
+            <ng-template #EPAG>
+                <div class="row mt-4">
+                    <!-- Previous Button -->
+                    <div class="col-lg-1">
+                        <div *ngIf="form.pageNo == 1; then PD else PE;"></div>
+                        <ng-template #PD><button disabled (click)="previous()" class="btn btn-dark w-100" style="border-radius: 5px;">Previous</button></ng-template>
+                        <ng-template #PE><button (click)="previous()" class="btn btn-primary w-100" style="border-radius: 5px;">Previous</button></ng-template>
+                    </div>
+
+                    <div class="col-lg-4"></div>
+
+                    <!-- Add Button -->
+                    <div class="col-lg-1">
+                        <a [routerLink]="['/doctor']" class="btn btn-success w-100" style="border-radius: 5px;">Add</a>
+                    </div>
+
+                    <div class="col-lg-5"></div>
+
+                    <!-- Next Button -->
+                    <div class="col-lg-1">
+                        <div *ngIf="list.length < 5 || form.MaxId == form.LastId; then ND else NE;"></div>
+                        <ng-template #ND><button disabled (click)="next()" class="btn btn-dark w-100" style="border-radius: 5px;">Next</button></ng-template>
+                        <ng-template #NE><button (click)="next()" class="btn btn-primary w-100" style="border-radius: 5px;">Next</button></ng-template>
+                    </div>
+                </div>
+            </ng-template>
+        
+
+        <!-- No Data or Error State -->
+        <ng-template #DPAG>
+            <b class="d-block text-center mt-4" style="font-size: x-large;">{{ form.mesg }}</b>
+            <button (click)="reload()" class="btn btn-success mt-2" style="display: block; margin: 0 auto; border-radius: 5px;">Back</button>
+        </ng-template>
+    </div>
+</body>

@@ -1,0 +1,93 @@
+<body style="background-color:whitesmoke;background-image: url(../../assets/bg6.jpg);
+background-repeat:no-repeat;background-size: cover;width: 100%; height:89vh;">
+<br>
+<h1 style="margin-top: -15px;margin-left: 40%;">User List</h1>
+<div class="container-fluid">
+    <form>
+    <div class="row">
+        <div class="col-lg 2"></div>
+        <div class="col-lg 5">
+            <input [(ngModel)]="form.login_id" name="login_id" placeholder="Enter Login Id" style="margin-left: 10%;" >
+            <button (click)="submit()" type="submit" class="btn btn-primary" style="margin-left:2%">Search <i class="fa fa-search"></i></button>
+        </div>
+        <div class="col-lg 2"></div>
+    </div>
+    </form>
+    <br>
+    <div *ngIf="success == true; then SUCC else FAIL"></div>
+    <ng-template #SUCC><b style="color:green;margin-left:33%;font-size: x-large;" id="timeout">{{ message }}</b></ng-template>
+    <ng-template #FAIL><b style="color:red;margin-left:33%;font-size: x-large;" id="timeout">{{ message }}</b></ng-template>
+    
+    <table width="100%">
+        <div class="row text-center">
+            <div class="col-md-12">
+                <table class="table table-bordered border-white table-md table-hover table-responsive-md">
+                    <thead class="thead-dark ">
+                        <th>S No.</th>
+                        <th>First Name</th>
+                        <th>Last Name</th>
+                        <th>Email Id</th>
+                        <th>DOB</th>
+                        <th>Address</th>
+                        <th>Gender</th>
+                        <th>Mobilenumber</th>
+                        <th>Role Name</th>
+                        <th>Edit</th>
+                        <th>Delete</th>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let e of list; let i = index;">
+                            <td>{{ form.index + i }}</td>
+                            <td>{{ e.firstName }}</td>
+                            <td>{{ e.lastName }}</td>
+                            <td>{{ e.login_id }}</td>
+                            <td>{{ e.dob }}</td>
+                            <td>{{ e.address }}</td>
+                            <td>{{ e.gender }}</td>
+                            <td>{{ e.mobilenumber }}</td>
+                            <td>{{ e.role_Name }}</td>
+                            <td><button (click)="edit(e.id)" style="color:blue">Edit <i class="fa fa-edit"></i></button></td>
+                            <div *ngIf=" e.role_Name == 'Admin'; then DDEL else EDEL;"></div>
+                                <ng-template #DDEL>
+                                    <td><button disabled (click)="delete(e.id)">Delete-<i class="fa fa-trash"></i></button></td>
+                                </ng-template>
+                                <ng-template #EDEL>
+                                    <td><button (click)="delete(e.id)">Delete <i class="fa fa-trash" style="color:red"></i></button></td>
+                                </ng-template>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </table>
+
+    <div *ngIf="form.mesg == '';then EPAG else DPAG;"></div>
+
+        <ng-template #EPAG>
+            <div class="row">
+                <div class="col-lg-1">
+                    <div *ngIf="form.pageNo == 1; then PD else PE"></div>
+                    <ng-template #PD><button disabled (click)="previous()" class="btn btn-dark">Previous</button></ng-template>
+                    <ng-template #PE><button (click)="previous()" class="btn btn-primary">Previous</button></ng-template>
+                </div>
+                <div class="col-lg-4"></div>
+                <div class="col-lg-1">
+                    <a [routerLink]="['/user']" class="btn btn-primary">Add</a>
+                </div>
+                <div class="col-lg-5"></div>
+                <div class="col-lg-1">
+                    <div *ngIf="list.length < 5 || form.LastId == form.MaxId; then ND else NE"></div>
+                    <ng-template #ND><button disabled (click)="next()" class="btn btn-dark">Next</button></ng-template>
+                    <ng-template #NE><button (click)="next()" class="btn btn-primary">Next</button></ng-template>
+                </div>
+            </div>
+        </ng-template>
+        <ng-template #DPAG>
+            <b style="margin-left:40%;font-size: x-large;">{{ form.mesg }}</b><br>
+            <button (click)="reload()" class="btn btn-primary" style="margin-left:45%;">Back</button>
+        </ng-template>
+
+
+</div>
+
+</body>

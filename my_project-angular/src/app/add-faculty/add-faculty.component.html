@@ -1,0 +1,110 @@
+<body style="background-color:whitesmoke;background-image:url(../../assets/bg7.jpg);
+background-repeat: no-repeat;background-size: cover;width:100%">
+
+<br><br>
+<div class="modal-dialog" style="width: 500px;">
+    <div class="modal-content" style="background-color:whitesmoke;background-image: url(../../assets/bg10.webp);background-repeat: no-repeat;background-size: cover;width:720px;margin-left:-150px;">
+        <div class="modal-header">
+            <h4 class="modal-title" style="padding-left:320px;font-family: bold;font-size: xx-large;">Faculty</h4>
+        </div>
+        <div *ngIf="success == true;then SUCC else FAIL;"></div>
+        <ng-template #SUCC><b style="color:green;margin-left: 33%;font-size: x-large;">{{ message }}</b></ng-template>
+        <ng-template #FAIL><b style="color:red;margin-left:33%;font-size: x-large;">{{ message }}</b></ng-template>
+
+        <div class="modal-body">
+        <form>
+            <div  style="padding: 10px;">
+            <div class="form-group row">
+                <label class="col-lg-2 form-control-label">First Name<span style="color:Red">*</span></label>
+                <div class="col-lg-4">
+                    <input [(ngModel)]="form.firstName" name="firstName" placeholder="Enter your First Name">
+                    <span style="color:red">{{ inputError.firstName }}</span>
+                </div>
+
+                <label class="col-lg-2 form-control-label">Last Name<span style="color:Red">*</span></label>
+                <div class="col-lg-4">
+                    <input [(ngModel)]="form.lastName" name="lastName" placeholder="Enter your Last Name">
+                    <span style="color: red;">{{ inputError.lastName }}</span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-lg-2 form-control-label">Email<span style="color:Red">*</span></label>
+                <div class="col-lg-4">
+                    <input [(ngModel)]="form.email" name="email" placeholder="Enter your Email">
+                    <span style="color:red">{{ inputError.email }}</span>
+                </div>
+
+                <label class="col-lg-2 form-control-label">Password<span style="color:Red">*</span></label>
+                <div class="col-lg-4">
+                    <input [(ngModel)]="form.password" name="password" type="password" placeholder="Enter your Password">
+                    <span style="color: red;">{{ inputError.password }}</span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-lg-2 form-control-label">Address<span style="color:Red">*</span></label>
+                <div class="col-lg-4">
+                    <input [(ngModel)]="form.address" name="address" placeholder="Enter your address">
+                    <span style="color:red">{{ inputError.address }}</span>
+                </div>
+
+                <label class="col-lg-2 form-control-label">Gender<span style="color:Red">*</span></label>
+                <div class="col-lg-4">
+                    <select [(ngModel)]="form.gender" name="gender" style="width:200px;height:30px;">
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
+                    </select>
+                    <span style="color: red;">{{ inputError.gender }}</span>
+                </div>        
+            </div>
+            <div class="form-group row">
+                <label class="col-lg-2 form-control-label">DOB<span style="color:Red">*</span></label>
+                <div class="col-lg-4">
+                    <input [(ngModel)]="form.dob" name="dob" type="date" style="width:200px;">
+                    <span style="color:red">{{ inputError.dob }}</span>
+                </div>
+                <label class="col-lg-2 form-control-label">College<span style="color:Red">*</span></label>
+                <div class="col-lg-4">
+                    <select [(ngModel)]="form.college_ID" name="college_ID" style="width:200px;height:30px;">
+                        <option *ngFor="let e of preloadCollege" value="{{ e.id }}">{{ e.collegeName }}</option>
+                    </select>
+                    <span style="color: red;">{{ inputError.college_ID }}</span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-lg-2 form-control-label">Course<span style="color:red">*</span></label>
+                <div class="col-lg-4">
+                    <select [(ngModel)]="form.course_ID" name="course_ID" style="width:200px;height:30px;">
+                        <option *ngFor="let r of preloadCourse" value="{{ r.id }}">{{ r.courseName }}</option>
+                    </select>
+                    <span style="color:Red">{{ inputError.course_ID }}</span>
+                </div>
+                <label class="col-lg-2 form-control-label">Subject<span style="color:red">*</span></label>
+                <div class="col-lg-4">
+                    <select [(ngModel)]="form.subject_ID" name="subject_ID" style="width:200px;height:30px;">
+                        <option *ngFor="let r of preloadSubject" value="{{ r.id }}">{{ r.subjectName }}</option>
+                    </select>
+                    <span style="color:Red">{{ inputError.subject_ID }}</span>
+                </div>
+            </div>
+
+            <div class="container">
+            <div class="row">
+                <div class="col-lg-3"></div>
+                <div class="col-lg-3">
+                    <button (click)="save()" class="btn btn-success form-control">Save</button>
+                </div>
+                <div class="col-lg-3">
+                    <button (click)="reset()" class="btn btn-primary form-control">Reset</button>
+                </div>
+            </div>
+            </div>
+        </div>
+        </form>
+        </div>
+
+    </div>
+</div>
+
+
+</body>
+

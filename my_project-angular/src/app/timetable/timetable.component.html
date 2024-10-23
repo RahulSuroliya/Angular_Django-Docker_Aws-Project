@@ -1,0 +1,95 @@
+
+<body style="background-color:whitesmoke;background-image:url(../../assets/bg7.jpg);
+background-repeat: no-repeat;background-size: cover;width:100%;">
+    <br><br>
+    <div class="modal-dialog" style="width: 500px;">
+        <div class="modal-content" style="background-color:whitesmoke;width: 520px;margin-left:-10px;
+        background-image: url(../../assets/bg10.webp);background-repeat:no-repeat;background-size: cover;">
+            <div class="modal-header text-center">
+                <h4 class="modal-title" style="padding-left:190px;font-family:bold;font-size:xx-large;">TimeTable</h4>
+            </div>
+            <div *ngIf = "success == true; then SUCC else FAIL"></div>
+            <ng-template #SUCC><b style="color:green;text-align: center;font-size: x-large;">{{ message }}</b></ng-template>
+            <ng-template #FAIL><b style="color:red;text-align: center;font-size: x-large;">{{ message }}</b></ng-template>
+
+            <form>
+            <div class="modal-body"style="padding: 10px;">
+                <div class="form-group row">
+                    <div class="col-lg-1"></div>
+                    <label class="col-lg-3 form-control-label">Exam Time<span style="color:red">*</span></label>
+                    <div class="col-lg-6">
+                        <select [(ngModel)]="form.examTime" name="examTime" style="width:203px;height: 30px;">
+                            <option>9:00AM to 1:00PM</option>
+                            <option>2:00PM to 4:00PM</option>
+                            <option>4:00PM to 7:00PM</option>
+                        </select>
+                        <span style="color:red">{{ inputError.examTime }}</span>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-lg-1"></div>
+                    <label class="col-lg-3 form-control-label">Exam date<span style="color:red">*</span></label>
+                    <div class="col-lg-6">
+                        <input [(ngModel)]="form.examDate" name="examDate" type="date" style="width:203px;height: 30px;">
+                        <span style="color:red">{{ inputError.examDate }}</span>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <div class="col-lg-1"></div>
+                    <label class="col-lg-3 form-control-label">Subject<span style="color:Red">*</span></label>
+                    <div class="col-lg-6">
+                        <select [(ngModel)]="form.subject_ID" name="subject_ID" style="width:203px;height: 30px;">
+                            <option *ngFor="let e of preloadSub" value="{{e.id}}">{{ e.subjectName }}</option>
+                        </select>
+                        <span style="color:red">{{ inputError.subject_ID }}</span>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-lg-1"></div>
+                    <label class="col-lg-3 form-control-label">Course<span style="color:red">*</span></label>
+                    <div class="col-lg-6">
+                        <select [(ngModel)]="form.course_ID" name="course_ID" style="width:203px;height: 30px;">
+                            <option *ngFor="let e of preloadCou" value="{{e.id}}">{{ e.courseName }}</option>
+                        </select>
+                        <span style="color:red">{{ inputError.course_ID }}</span>
+                    </div>
+                </div>
+
+
+                <div class="form-group row">
+                    <div class="col-lg-1"></div>
+                    <label class="col-lg-3 form-control-label">Semester<span style="color:Red">*</span></label>
+                    <div class="col-lg-6">
+                        <select [(ngModel)]="form.semester" name="semester" style="width:203px;height: 30px;">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                            <option value="7">7</option>
+                            <option value="8">8</option>
+                        </select>
+                        <span style="color:red">{{ inputError.semester }}</span>
+                    </div>
+                </div>
+
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-2"></div>
+                        <div class="col-lg-3">
+                            <button (click)="save()" type="submit" class="btn btn-success form-control">Save</button>
+                        </div>
+                        <div class="col-lg-3">
+                            <button (click)="reset()" type="submit" class="btn btn-primary form-control">Reset</button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            </form>
+        </div>
+    </div>
+
+</body>

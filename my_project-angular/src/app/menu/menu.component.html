@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ORS</title>
+
+    <style>
+        .footer {
+            position:fixed;
+            left:0;
+            bottom:0;
+            width:100%;
+            background-color: #325980;
+            color:white;
+            text-align:center;
+            height:35px;
+            padding-top:5px;
+        }
+        .dropbtn {
+            background-color: #343a40;
+            color:white;
+            padding:10px;
+            font-size: 18px;
+            border:none;
+        }
+        .dropdown {
+            position:relative;
+            display:inline-block;
+            padding:5px;
+            /* float: left; */
+            /* margin-right: 25px; */
+            /* padding-right: 25px; */
+        }
+        .dropdown-content {
+            display: none;
+            position:absolute;
+            background-color:#343a40;
+            min-width: 140px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+        }
+        .dropdown-content a {
+            color:whitesmoke;
+            padding:12px 16px;
+            text-decoration: none;
+            display: block;
+        }
+        .dropbtn{
+            font-size: 15px;
+            background-color: #325980;
+        }
+        .navbar{
+            background-color: #325980;
+        }
+        
+
+        .dropdown-content a:hover { background-color: #686464; }
+        .dropdown:hover .dropdown-content { display: block; }
+        .dropdown:hover .dropbtn  { background-color: #343a40; }
+    </style>
+</head>
+<body>
+<nav *ngIf="islogin()" class="navbar navbar-expand-lg navbar-dark">
+    <a class="navbar-brand" href="#"><img src="assets/customLogo1.png" height="40px"></a>
+    <div style="padding-left: 50px;">
+    <div class="dropdown">
+        <i class="fa fa-user" style="font-size:17px;color:rgb(255,238,0);"></i>
+        <button class="dropbtn">User</button>.
+        <div class="dropdown-content">
+            <a class="nav-link" [routerLink] = "['/user']"><i class="fa fa-user" style="font-size: 17px;color:rgb(255,238,0)"></i> User</a>
+            <a class="nav-link" [routerLink] = "['/userlist']"><i class="fa fa-list" style="font-size:17px;color:rgb(255,238,0)"></i> User List</a>
+        </div>
+    </div>
+
+    <!-- <div class="dropdown">
+        <i class="fa fa-user" style="font-size:17px;color:rgb(255,238,0);"></i>
+        <button class="dropbtn">Vehicle</button>.
+        <div class="dropdown-content">
+            <a class="nav-link" [routerLink] = "['/vehicle']"><i class="fa fa-user" style="font-size: 17px;color:rgb(255,238,0)"></i> Vehicle</a>
+            <a class="nav-link" [routerLink] = "['/vehiclelist']"><i class="fa fa-list" style="font-size:17px;color:rgb(255,238,0)"></i> Vehicle List</a>
+        </div>
+    </div>
+
+    <div class="dropdown">
+        <i class="fa fa-user" style="font-size:17px;color:rgb(255,238,0);"></i>
+        <button class="dropbtn">Shopping Cart</button>.
+        <div class="dropdown-content">
+            <a class="nav-link" [routerLink] = "['/shoppingcart']"><i class="fa fa-user" style="font-size: 17px;color:rgb(255,238,0)"></i> Shopping Cart</a>
+            <a class="nav-link" [routerLink] = "['/shoppingcartlist']"><i class="fa fa-list" style="font-size:17px;color:rgb(255,238,0)"></i> Shopping Cart List</a>
+        </div>
+    </div>
+
+    <div class="dropdown">
+        <i class="fa fa-user" style="font-size:17px;color:rgb(255,238,0);"></i>
+        <button class="dropbtn">Order</button>.
+        <div class="dropdown-content">
+            <a class="nav-link" [routerLink] = "['/order']"><i class="fa fa-user" style="font-size: 17px;color:rgb(255,238,0)"></i> Order</a>
+            <a class="nav-link" [routerLink] = "['/orderlist']"><i class="fa fa-list" style="font-size:17px;color:rgb(255,238,0)"></i> Order List</a>
+        </div>
+    </div>
+
+    <div class="dropdown">
+        <i class="fa fa-user" style="font-size:17px;color:rgb(255,238,0);"></i>
+        <button class="dropbtn">Issue</button>.
+        <div class="dropdown-content">
+            <a class="nav-link" [routerLink] = "['/issue']"><i class="fa fa-user" style="font-size: 17px;color:rgb(255,238,0)"></i> Issue</a>
+            <a class="nav-link" [routerLink] = "['/issuelist']"><i class="fa fa-list" style="font-size:17px;color:rgb(255,238,0)"></i> Issue List</a>
+        </div>
+    </div>
+    <div class="dropdown">
+        <i class="fa fa-user" style="font-size:17px;color:rgb(255,238,0);"></i>
+        <button class="dropbtn">Doctor</button>.
+        <div class="dropdown-content">
+            <a class="nav-link" [routerLink] = "['/doctor']"><i class="fa fa-user" style="font-size: 17px;color:rgb(255,238,0)"></i> Doctor</a>
+            <a class="nav-link" [routerLink] = "['/doctorlist']"><i class="fa fa-list" style="font-size:17px;color:rgb(255,238,0)"></i> Doctor List</a>
+        </div>
+    </div>
+
+    <div class="dropdown">
+        <i class="fa fa-user" style="font-size:17px;color:rgb(255,238,0);"></i>
+        <button class="dropbtn">Lead</button>.
+        <div class="dropdown-content">
+            <a class="nav-link" [routerLink] = "['/lead']"><i class="fa fa-user" style="font-size: 17px;color:rgb(255,238,0)"></i> Lead</a>
+            <a class="nav-link" [routerLink] = "['/leadlist']"><i class="fa fa-list" style="font-size:17px;color:rgb(255,238,0)"></i> Lead List</a>
+        </div>
+    </div> -->
+
+    <div class="dropdown">
+        <i class="fa fa-user" style="font-size:17px;color:rgb(255,238,0);"></i>
+        <button class="dropbtn">Task</button>.
+        <div class="dropdown-content">
+            <a class="nav-link" [routerLink] = "['/task']"><i class="fa fa-user" style="font-size: 17px;color:rgb(255,238,0)"></i> Task</a>
+            <a class="nav-link" [routerLink] = "['/tasklist']"><i class="fa fa-list" style="font-size:17px;color:rgb(255,238,0)"></i> Task List</a>
+        </div>
+    </div>
+
+    <div class="dropdown">
+        <i class="fa fa-user" style="font-size:17px;color:rgb(255,238,0);"></i>
+        <button class="dropbtn">Staff Member</button>.
+        <div class="dropdown-content">
+            <a class="nav-link" [routerLink] = "['/staffmember']"><i class="fa fa-user" style="font-size: 17px;color:rgb(255,238,0)"></i> Staff Member</a>
+            <a class="nav-link" [routerLink] = "['/staffmemberlist']"><i class="fa fa-list" style="font-size:17px;color:rgb(255,238,0)"></i> Staff Member List</a>
+        </div>
+    </div>
+
+    <div class="dropdown">
+        <i class="fa fa-university" style="font-size: 17px;color:rgb(255,238,0)"></i>
+        <button class="dropbtn">College</button>
+        <div class="dropdown-content">
+            <a class="nav-link" [routerLink] = "['/college']"><i class="fa fa-university" style="font-size: 17px;color:rgb(255,238,0)"></i> College</a>
+            <a class="nav-link" [routerLink] = "['/collegelist']"><i class="fa fa-list" style="font-size:17px;color:rgb(255,238,0)"></i> College List</a>
+        </div>
+    </div>
+
+    <div class="dropdown">
+        <i class="fa fa-book" style="font-size:17px;color:rgb(255,238,0);"></i>
+        <button class="dropbtn">Course</button>
+        <div class="dropdown-content">
+            <a class="nav-link" [routerLink] = "['/course']"><i class="fa fa-book" style="font-size:17px;color:rgb(255,238,0)"></i> Course</a>
+            <a class="nav-link" [routerLink] = "['/courselist']"><i class="fa fa-list" style="font-size:17px;color:rgb(255,238,0);"></i> Course List</a>        
+        </div>
+    </div>
+
+    <div class="dropdown">
+        <i class="fa fa-server" style="font-size:17px;color:rgb(255,238,0)"></i>
+        <button class="dropbtn">Marksheet</button>
+        <div class="dropdown-content">
+            <a class="nav-link" [routerLink] = "['/marksheet']"><i class="fa fa-server" style="font-size:17px;color:rgb(255,238,0);"></i> Marksheet</a>
+            <a class="nav-link" [routerLink] = "['/marksheetlist']"><i class="fa fa-list" style="font-size:17px;color:rgb(255,238,0)"></i> Marksheet List</a>
+            <a class="nav-link" [routerLink] = "['/meritlist']"><i class="fa fa-list" style="font-size:17px;color:rgb(255,238,0)"></i> Merit List</a>
+        </div>
+    </div>
+
+    <div class="dropdown">
+        <i class="fa fa-users" style="font-size:17px;color:rgb(255,238,0)"></i>
+        <button class="dropbtn">Role</button>
+        <div class="dropdown-content">
+            <a class="nav-link" [routerLink] = "['/role']"><i class="fa fa-users" style="font-size:17px;color:rgb(255,238,0)"></i> Role</a>
+            <a class="nav-link" [routerLink] = "['/rolelist']"><i class="fa fa-list" style="font-size:17px;color:rgb(255,238,0)"></i> Role List</a>
+        </div>
+    </div>
+
+    <div class="dropdown">
+        <i class="fa fa-graduation-cap" style="font-size:17px;color:rgb(255,238,0)"></i>
+        <button class="dropbtn">Student</button>
+        <div class="dropdown-content">
+            <a class="nav-link" [routerLink] = "['/student']"><i class="fa fa-graduation-cap" style="font-size:17px;color:rgb(255,238,0)"></i> Student</a>
+            <a class="nav-link" [routerLink] = "['/studentlist']"><i class="fa fa-list" style="font-size:17px;color:rgb(255,238,0)"></i> Student List</a>
+        </div>
+    </div>
+
+    <div class="dropdown">
+        <i class="fa fa-folder" style="font-size:17px;color:rgb(255,238,0)"></i>
+        <button class="dropbtn">Subject</button>
+        <div class="dropdown-content">
+            <a class="nav-link" [routerLink] = "['/subject']"><i class="fa fa-folder" style="font-size:17px;color:rgb(255,238,0)"></i> Subject</a>
+            <a class="nav-link" [routerLink] = "['/subjectlist']"><i class="fa fa-list" style="font-size:17px;color:rgb(255,238,0)"></i> Subject List</a>
+        </div>
+    </div>
+
+    <div class="dropdown">
+        <i class="fa fa-address-book" style="font-size:17px;color:rgb(255,238,0)"></i>
+        <button class="dropbtn">Faculty</button>
+        <div class="dropdown-content">
+            <a class="nav-link" [routerLink] = "['/addfaculty']"><i class="fa fa-address-book" style="font-size:17px;color:rgb(255,238,0)"></i> Faculty</a>
+            <a class="nav-link" [routerLink] = "['/addfacultylist']"><i class="fa fa-list" style="font-size:17px;color:rgb(255,238,0)"></i> Faculty List</a>
+        </div>
+    </div>
+
+    <div class="dropdown">
+        <i class="fa fa-table" style="font-size:17px;color:rgb(255,238,0)"></i>
+        <button class="dropbtn">TimeTable</button>
+        <div class="dropdown-content">
+            <a class="nav-link" [routerLink] = "['/timetable']"><i class="fa fa-folder" style="font-size:17px;color:rgb(255,238,0)"></i> TimeTable</a>
+            <a class="nav-link" [routerLink] = "['/timetablelist']"><i class="fa fa-list" style="font-size:17px;color:rgb(255,238,0)"></i> TimeTable List</a>
+        </div>
+    </div>
+
+    <div class="dropdown">
+        <i class="fa fa-info-circle" style="font-size:17px;color:rgb(255,238,0)"></i>
+        <button class="dropbtn">About</button>
+        <div class="dropdown-content">
+            <a class="nav-link" [routerLink] = "['/changepassword']"><i class="fa fa-unlock-alt" style="font-size:17px;color:rgb(255,238,0)"></i> Change Password</a>
+            <a class="nav-link" [routerLink] = "['/forgetpassword']"><i class="fa fa-key" style="font-size:17px;color:rgb(255,238,0)"></i> Forget Password</a>
+        </div>
+    </div> 
+
+
+    <div class="dropdown">
+        <b style="color:white;font-size:18px;"><i class="fa fa-user-circle" style="color:rgb(255,238,0);"></i> {{firstname}}({{ rolename}})</b>
+        <div class="dropdown-content">
+            <br>
+            <a class="nav-link" [routerLink] = "['/logout']"><i class="fa fa-sign-out" style="font-size:17px;color:rgb(255,238,0)"></i> Logout</a>
+        </div>
+    </div>
+    </div>
+</nav>
+    <div>
+    <router-outlet></router-outlet>
+</div>
+
+<div class="footer">
+    <b>Copyright &copy; Rays Technologies</b>
+</div>
+  
+</body>
+</html>
+

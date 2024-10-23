@@ -1,0 +1,86 @@
+
+<body style="background-color:whitesmoke;background-image: url(../../assets/bg6.jpg);
+background-repeat: no-repeat;background-size: cover;width: 100%;">
+
+   <br>
+   <h1 style="margin-top: -15px;margin-left: 40%;">Student List</h1>
+   <div class="container-fluid">
+       <form>
+       <div class="row">
+        <div class="col-lg-4"></div>
+        <div class="col-lg-5">
+           <input [(ngModel)]="form.firstName" name="firstName" placeholder="Enter First Name" style="margin-left:10%;">
+       
+           <button (click)="submit()" type="submit" class="btn btn-primary" style="margin-left:2%">Search <i class="fa fa-search"></i></button>
+        </div>
+        <div class="col-lg-2"></div>
+        </div>
+       </form>
+       <br>
+       <div *ngIf="success == true; then SUCC else FAIL"></div>
+       <ng-template #SUCC><b style="color:green;margin-left:33%;font-size: x-large;" id="timeout">{{ message }}</b></ng-template>
+       <ng-template #FAIL><b style="color:red;margin-left:33%;font-size: x-large;" id="timeout">{{ message }}</b></ng-template>
+       
+       <table width="100%">
+           <div class="row text-center">
+               <div class="col-md-12">
+                   <table class="table table-bordered border-dark table-sm table-hover table-responsive-sm">
+                       <thead class="thead-dark">
+                           <th>S.No.</th>
+                           <th>First Name</th>
+                           <th>Last Name</th>
+                           <th>Email Id</th>
+                           <th>DOB</th>
+                           <th>MobileNumber</th>
+                           <th>College Name</th>
+                           <th>Edit</th>
+                           <th>Delete</th>
+                       </thead>
+                       <tbody>
+                           <tr *ngFor="let e of list; let i = index;">
+                               <td>{{ form.index + i }}</td>
+                               <td>{{ e.firstName }}</td>
+                               <td>{{ e.lastName }}</td>
+                               <td>{{ e.email }}</td>
+                               <td>{{ e.dob }}</td>
+                               <td>{{ e.mobileNumber }}</td>
+                               <td>{{ e.collegeName }}</td>
+                               <td><button (click)="edit(e.id)" style="color:blue">Edit <i class="fa fa-edit"></i></button></td>
+                               <td><button (click)="delete(e.id)">Delete <i class="fa fa-trash" style="color:red"></i></button></td>
+                           </tr>
+                       </tbody>
+                   </table>
+               </div>
+           </div>
+       </table>
+   
+       <div *ngIf="form.mesg == '';then EPAG else DPAG;"></div>
+   
+           <ng-template #EPAG>
+               <div class="row">
+                   <div class="col-lg-1">
+                       <div *ngIf="form.pageNo == 1; then PD else PE"></div>
+                       <ng-template #PD><button disabled (click)="previous()" class="btn btn-dark">Previous</button></ng-template>
+                       <ng-template #PE><button (click)="previous()" class="btn btn-primary">Previous</button></ng-template>
+                   </div>
+                   <div class="col-lg-4"></div>
+                   <div class="col-lg-1">
+                       <a [routerLink]="['/student']" class="btn btn-primary">Add</a>
+                   </div>
+                   <div class="col-lg-5"></div>
+                   <div class="col-lg-1">
+                       <div *ngIf="list.length < 5 || form.LastId == form.MaxId; then ND else NE"></div>
+                       <ng-template #ND><button disabled (click)="next()" class="btn btn-dark">Next</button></ng-template>
+                       <ng-template #NE><button (click)="next()" class="btn btn-primary">Next</button></ng-template>
+                   </div>
+               </div>
+           </ng-template>
+           <ng-template #DPAG>
+               <b style="margin-left:40%;font-size: x-large;">{{ form.mesg }}</b><br>
+               <button (click)="reload()" class="btn btn-primary" style="margin-left:45%;">Back</button>
+           </ng-template>
+   
+   
+   </div>
+   
+   </body>

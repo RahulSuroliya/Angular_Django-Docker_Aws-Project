@@ -1,0 +1,75 @@
+
+<body style="background-color:whitesmoke;background-image: url(../../assets/bg7.jpg);
+background-repeat: no-repeat;background-size: cover;width:100%;">
+    <br><br>
+    <div class="modal-dialog" style="width: 500px;">
+        <div class="modal-content" style="background-color:whitesmoke;background-image: url(../../assets/bg10.webp);background-repeat: no-repeat;background-size: cover;width:720px;margin-left:-150px;">
+            <div class="modal-header text-center">
+                <h4 class="modal-title" style="padding-left:320px;font-family:bold;font-size:xx-large;">Student</h4>
+            </div>
+            <div *ngIf = "success == true; then SUCC else FAIL"></div>
+            <ng-template #SUCC><b style="color:green;text-align: center;font-size: x-large;">{{ message }}</b></ng-template>
+            <ng-template #FAIL><b style="color:red;text-align: center;font-size: x-large;">{{ message }}</b></ng-template>
+
+            <form>
+            <div class="modal-body" style="padding: 10px;">
+                <div class="form-group row">
+                    <label class="col-lg-2 form-control-label">First Name<span style="color:red">*</span></label>
+                    <div class="col-lg-4">
+                        <input [(ngModel)]="form.firstName" name="firstName" placeholder="Enter your First name">
+                        <span style="color:red">{{ inputError.firstName }}</span>
+                    </div>
+                    <label class="col-lg-2 form-control-label">Last Name<span style="color:red">*</span></label>
+                    <div class="col-lg-4">
+                        <input [(ngModel)]="form.lastName" name="lastName" placeholder="Enter your Last Name">
+                        <span style="color:red">{{ inputError.lastName }}</span>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-lg-2 form-control-label">Email Id<span style="color:Red">*</span></label>
+                    <div class="col-lg-4">
+                        <input [(ngModel)]="form.email" name="email" placeholder="Enter your Email Id">
+                        <span style="color:red">{{ inputError.email }}</span>
+                    </div>
+                    <label class="col-lg-2 form-control-label">DOB<span style="color:red">*</span></label>
+                    <div class="col-lg-4">
+                        <input [(ngModel)]="form.dob" name="dob" type="date" style="width:200px;">
+                        <span style="color:red">{{ inputError.dob }}</span>
+                    </div>
+                </div>
+
+
+                <div class="form-group row">
+                    <label class="col-lg-2 form-control-label">Mobile No<span style="color:Red">*</span></label>
+                    <div class="col-lg-4">
+                        <input [(ngModel)]="form.mobileNumber" name="mobileNumber" placeholder="Enter your Mobile No">
+                        <span style="color:red">{{ inputError.mobileNumber }}</span>
+                    </div>
+                    <label class="col-lg-2 form-control-label">College Name<span style="color:Red">*</span></label>
+                    <div class="col-lg-4">
+                        <select [(ngModel)]="form.college_ID" name="college_ID" style="width: 200px;height:30px;">
+                            <option *ngFor="let r of preloadData"  value="{{ r.id }}">{{ r.collegeName }}</option>
+                        </select>
+                        <span style="color:red">{{ inputError.college_ID }}</span>
+                    </div>
+                </div>
+
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-3"></div>
+                        <div class="col-lg-3">
+                            <button (click)="save()" type="submit" class="btn btn-success form-control">Save</button>
+                        </div>
+                        <div class="col-lg-3">
+                            <button (click)="reset()" type="submit" class="btn btn-primary form-control">Reset</button>
+                        </div>
+                    </div>
+                </div>   
+
+            </div>
+            </form>
+        </div>
+    </div>
+
+</body>

@@ -1,0 +1,75 @@
+
+<body style="background-color:whitesmoke;background-image: url(../../assets/bg7.jpg);
+background-repeat: no-repeat;background-size: cover;width: 100%;">
+<br><br>
+
+<div class="modal-dialog" style="width: 500px;">
+    <div class="modal-content" style="background-color: whitesmoke;
+    background-image: url(../../assets/bg10.webp);background-repeat:no-repeat;background-size: cover;">
+        <div class="modal-header text-center">
+            <h4 class="modal-joiningDate" style="font-family: bold;font-size: xx-large;margin-left:170px;">Task
+            </h4>
+        </div>
+        <div *ngIf="success == true;then SUCC else FAIL"></div>
+        <ng-template #SUCC><b style="color:green;text-align: center;font-size: x-large;">{{ message }}</b></ng-template>
+        <ng-template #FAIL><b style="color:red;text-align: center;font-size: x-large;">{{ message }}</b></ng-template>
+
+        <form>
+        <div class="modal-body" style="padding: 10px;">
+
+            <div class="form-group row">
+                <div class="col-lg-1"></div>
+                <label class="col-lg-3 form-control-label">Full Name <span style="color:red">*</span></label>
+                    <div class="col-lg-6">
+                        <input [(ngModel)]="form.fullName" name="fullName" type="text" style="width:200px;">
+                        <span style="color:red">{{ inputError.fullName }}</span>
+                    </div>
+            </div>
+            
+            <div class="form-group row">
+                <div class="col-lg-1"></div>
+                <label class="col-lg-3 form-control-label">Joining Date <span style="color:Red">*</span></label>
+                <div class="col-lg-6">
+                    <input [(ngModel)]="form.joiningDate" name="joiningDate" type="date" >
+                    <span style="color:red">{{ inputError.joiningDate }}</span>
+                </div>
+            </div>
+                                      
+            <div class="form-group row">
+                <div class="col-lg-1"></div>
+                <label class="col-lg-3 form-control-label">Division <span style="color:Red">*</span></label>
+                <div class="col-lg-6">
+                    <select [(ngModel)]="form.did" name="did" style="width: 200px;height:30px;">
+                        <option *ngFor="let r of preloadData"  value="{{ r.did}}">{{ r.division }}</option>
+                        </select>
+                    <span style="color:red">{{ inputError.did }}</span>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <div class="col-lg-1"></div>
+                <label class="col-lg-3 form-control-label">Previous Employer<span style="color:Red">*</span></label>
+                <div class="col-lg-6">
+                    <input [(ngModel)]="form.previousEmployer" name="previousEmployer" type="text" style="width:200px;">
+                    <span style="color:red">{{ inputError.previousEmployer }}</span>
+                </div>
+            </div>
+            
+
+            <div class="row">
+                <div class="col-lg-2"></div>
+                <div class="col-lg-3">
+                    <button (click)="save()" type="submit" class="btn btn-success form-control">Save</button>
+                </div>
+                <div class="col-lg-3">
+                    <button (click)="reset()" class="btn btn-primary form-control">Reset</button>
+                </div>
+            </div>
+
+        </div>
+        </form>
+
+    </div>
+</div>
+
+</body>

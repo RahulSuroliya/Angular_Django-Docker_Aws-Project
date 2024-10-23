@@ -1,0 +1,75 @@
+
+<body style="background-color:whitesmoke;background-image: url(../../assets/bg7.jpg);
+background-repeat: no-repeat;background-size: cover;width: 100%;">
+<br><br>
+
+<div class="modal-dialog" style="width: 500px;">
+    <div class="modal-content" style="background-color: whitesmoke;
+    background-image: url(../../assets/bg10.webp);background-repeat:no-repeat;background-size: cover;">
+        <div class="modal-header text-center">
+            <h4 class="modal-title" style="font-family: bold;font-size: xx-large;margin-left:170px;">College</h4>
+        </div>
+        <div *ngIf="success == true;then SUCC else FAIL"></div>
+        <ng-template #SUCC><b style="color:green;text-align: center;font-size: x-large;">{{ message }}</b></ng-template>
+        <ng-template #FAIL><b style="color:red;text-align: center;font-size: x-large;">{{ message }}</b></ng-template>
+
+        <form>
+        <div class="modal-body" style="padding: 10px;">
+            <div class="form-group row">
+                <div class="col-lg-1"></div>
+                <label class="col-lg-3 form-control-label">Name<span style="color:Red">*</span></label>
+                <div class="col-lg-6">
+                    <input [(ngModel)]="form.collegeName" name="collegeName" placeholder="Enter your College Name">
+                    <span style="color:Red">{{ inputError.collegeName }}</span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-lg-1"></div>
+                <label class="col-lg-3 form-control-label">City<span style="color:Red">*</span></label>
+                <div class="col-lg-6">
+                    <input [(ngModel)]="form.collegeCity" name="collegeCity" placeholder="Enter your City">
+                    <span style="color:red">{{ inputError.collegeCity }}</span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-lg-1"></div>
+                <label class="col-lg-3 form-control-label">State<span style="color:Red">*</span></label>
+                <div class="col-lg-6">
+                    <input [(ngModel)]="form.collegeState" name="collegeState" placeholder="Enter your State">
+                    <span style="color:red">{{ inputError.collegeState }}</span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-lg-1"></div>
+                <label class="col-lg-3 form-control-label">Address<span style="color:Red">*</span></label>
+                <div class="col-lg-6">
+                    <input [(ngModel)]="form.collegeAddress" name="address" placeholder="Enter your Address">
+                    <span style="color:red">{{ inputError.collegeAddress }}</span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-lg-1"></div>
+                <label class="col-lg-3 form-control-label">PhoneNo<span style="color:Red">*</span></label>
+                <div class="col-lg-6">
+                    <input [(ngModel)]="form.collegePhoneNumber" name="collegePhoneNumber" placeholder="Enter your PhoneNo">
+                    <span style="color:Red">{{ inputError.collegePhoneNumber }}</span>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-2"></div>
+                <div class="col-lg-3">
+                    <button (click)="save()" type="submit" class="btn btn-success form-control">Save</button>
+                </div>
+                <div class="col-lg-3">
+                    <button (click)="reset()" class="btn btn-primary form-control">Reset</button>
+                </div>
+            </div>
+
+        </div>
+        </form>
+
+    </div>
+</div>
+
+</body>

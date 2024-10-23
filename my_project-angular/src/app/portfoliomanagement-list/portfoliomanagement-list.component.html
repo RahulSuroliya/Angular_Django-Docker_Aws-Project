@@ -1,0 +1,108 @@
+<body style="background-color:whitesmoke;background-image: url(../../assets/bg6.jpg); background-repeat: no-repeat; background-size: cover; width: 100%;">
+    <br>
+    <h1 style="margin-top: -15px; margin-left: 40%;">Portfolio Management List</h1>
+    <div class="container-fluid">
+        <!-- Search Form -->
+        <div class="row align-items-center mb-3">
+            <!-- Name Input -->
+            <div class="col-lg-2">
+                <label for="nameInput">Portfolio Name:</label>
+                <input id="nameInput" [(ngModel)]="form.portfolioName" name="portfolioName" placeholder="Enter Portfolio name" class="form-control">
+                <span style="color: Red;">{{ inputError.portfolioName }}</span>
+            </div>
+
+            <!-- Expertise Select -->
+            <div class="col-lg-2">
+                <label for="expertiseSelect">Risk Tolerance Level:</label>
+                <select id="expertiseSelect" [(ngModel)]="form.rid" name="rid" class="form-control">
+                    <option value="">Select Risk Tolerance Level</option>
+                    <option *ngFor="let r of preloadData" [value]="r.rid">{{ r.riskToleranceLevel }}</option>
+                </select>
+                <span style="color: Red;">{{ inputError.rid }}</span>
+            </div>
+
+            <!-- Initial Investment Input -->
+            <div class="col-lg-2">
+                <label for="expertiseSelect">Initial Investment Amount:</label>
+
+                <input [(ngModel)]="form.initialInvestmentAmount" name="initialInvestmentAmount" placeholder="Enter initial investment Amount" type="number" class="form-control">
+                <span style="color: Red;">{{ inputError.initialInvestmentAmount }}</span>
+            </div>
+
+            <!-- Search Button -->
+            <div class="col-lg-2">
+                <label>&nbsp;</label> <!-- Empty label for spacing -->
+                <button (click)="submit()" type="submit" class="btn btn-primary w-100">Search <i class="fa fa-search"></i></button>
+            </div>
+        </div>
+
+        <!-- Success/Failure Message -->
+        <div *ngIf="success; then SUCC else FAIL"></div>
+        <ng-template #SUCC>
+            <b style="color: green; margin-left: 33%; font-size: x-large;" id="timeout">{{ message }}</b>
+        </ng-template>
+        <ng-template #FAIL>
+            <b style="color: red; margin-left: 33%; font-size: x-large;" id="timeout">{{ message }}</b>
+        </ng-template>
+
+        <!-- Portfolio List Table -->
+        <table class="table table-bordered border-dark table-sm table-hover table-responsive-sm">
+            <thead class="thead-dark">
+                <tr>
+                    <th>S.No.</th>
+                    <th>Portfolio Name</th>
+                    <th>Risk Tolerance Level</th>
+                    <th>Initial Investment Level</th>
+                    <th>Investment Strategy</th>
+                    <th>Edit</th>
+                    <th>Delete</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let e of list; let i = index;">
+                    <td>{{ i + 1 }}</td> <!-- Changed to simpler index display -->
+                    <td>{{ e.portfolioName }}</td>
+                    <td>{{ e.riskToleranceLevel }}</td>
+                    <td>{{ e.initialInvestmentAmount }}</td>
+                    <td>{{ e.investmentStrategy }}</td>
+                    <td><button (click)="edit(e.id)" class="btn btn-link text-primary">Edit <i class="fa fa-edit"></i></button></td>
+                    <td><button (click)="delete(e.id)" class="btn btn-link text-danger">Delete <i class="fa fa-trash"></i></button></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <!-- Pagination Controls -->
+        <div *ngIf="!form.mesg; else DPAG">
+            <div class="row">
+                <!-- Previous Button -->
+                <div class="col-lg-1">
+                    <ng-container *ngIf="form.pageNo === 1; then PD else PE"></ng-container>
+                    <ng-template #PD><button disabled class="btn btn-dark">Previous</button></ng-template>
+                    <ng-template #PE><button (click)="previous()" class="btn btn-primary">Previous</button></ng-template>
+                </div>
+
+                <div class="col-lg-4"></div>
+
+                <!-- Add Button -->
+                <div class="col-lg-1">
+                    <a [routerLink]="['/doctor']" class="btn btn-primary">Add</a>
+                </div>
+
+                <div class="col-lg-5"></div>
+
+                <!-- Next Button -->
+                <div class="col-lg-1">
+                    <ng-container *ngIf="list.length < 5 || form.MaxId === form.LastId; then ND else NE"></ng-container>
+                    <ng-template #ND><button disabled class="btn btn-dark">Next</button></ng-template>
+                    <ng-template #NE><button (click)="next()" class="btn btn-primary">Next</button></ng-template>
+                </div>
+            </div>
+        </div>
+
+        <!-- No Data or Error State -->
+        <ng-template #DPAG>
+            <b style="margin-left: 40%; font-size: x-large;">{{ form.mesg }}</b>
+            <button (click)="reload()" class="btn btn-primary" style="margin-left: 45%;">Back</button>
+        </ng-template>
+    </div>
+</body>

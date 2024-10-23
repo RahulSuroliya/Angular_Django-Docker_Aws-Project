@@ -1,0 +1,44 @@
+
+
+<body style="background-color:whitesmoke;background-image: url(../../assets/bg6.jpg);
+background-repeat: no-repeat;background-size:cover;width:100%">
+
+    <br>
+    <h1 style="margin-top:-15px;margin-left: 40%;">Merit List</h1><br>
+    <div class="container-fluid">
+        
+        <table width="100%">
+            <div class="row">
+                <div class="col-md-12">
+                    <table class="table table-bordered border-dark table-sm table-hover table-responsive-sm">
+                        <thead class="thead-dark">
+                            <th>S.No.</th>
+                            <th>Roll Number</th>
+                            <th>Name</th>
+                            <th>Physics</th>
+                            <th>Chemistry</th>
+                            <th>Maths</th>
+                            <th>Total</th>
+                            <th>Percentage</th>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let e of list;let i=index;">
+                                <td>{{ i + 1 }}</td>
+                                <td>{{ e.rollNumber }}</td>
+                                <td>{{ e.name }}</td>
+                                <td>{{ e.physics }}</td>
+                                <td>{{ e.chemistry }}</td>
+                                <td>{{ e.maths }}</td>
+                                <td>{{ e.total }}/300</td>
+                                <td>{{ e.percentage | number:'.2-2' }}%</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </table>    
+        
+    </div>
+    
+    </body>
+    
