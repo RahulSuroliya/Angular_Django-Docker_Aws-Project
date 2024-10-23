@@ -14,6 +14,7 @@ from .restctl.TimeTableCtl import TimeTableCtl
 from .restctl.UserCtl import UserCtl
 from .restctl.VehicleCtl import VehicleCtl
 from .restctl.PortfolioManagementCtl import PortfolioManagementCtl
+from .restctl.PurchaseorderCtl import PurchaseorderCtl
 # from .restctl.ShoppingCartCtl import ShoppingCartCtl
 # from .restctl.LeadCtl import LeadCtl
 # from .restctl.OrderCtl import OrderCtl

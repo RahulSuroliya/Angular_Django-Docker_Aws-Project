@@ -32,6 +32,11 @@ class OrderForm(forms.ModelForm):
         model = Order
         fields = "__all__"
 
+class PurchaseorderForm(forms.ModelForm):
+    class Meta:
+        model = Purchaseorder
+        fields = "__all__"
+
 class IssueForm(forms.ModelForm):
     class Meta:
         model = Issue

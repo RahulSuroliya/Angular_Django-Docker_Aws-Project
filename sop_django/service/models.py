@@ -271,6 +271,29 @@ class Order(models.Model):
     class Meta:
         db_table = 'sos_order'
 
+
+class Purchaseorder(models.Model):
+    totalQuantity = models.BigIntegerField(default=0)
+    product = models.CharField(max_length=50)
+    orderDate = models.DateField(max_length=20)
+    totalCost = models.BigIntegerField(default=0)
+    pid = models.IntegerField(default=0)
+
+    def to_json(self):
+        data = {
+            'id': self.id,
+            'totalQuantity': self.totalQuantity,
+            'product': self.product,
+            'orderDate': self.orderDate,
+            'totalCost':self.totalCost,
+            'pid': self.pid
+
+        }
+        return data
+
+    class Meta:
+        db_table = 'sos_purchaseorder'
+
 class Issue(models.Model):
     openDate = models.DateField(max_length=20)
     title= models.CharField(max_length=50)
